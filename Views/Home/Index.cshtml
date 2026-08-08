@@ -1,0 +1,14 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to Student App</h1>
+    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<!-- Buttons for the homepage-->
+<div class="justify-content-center mt-4 gap-3">
+    <a asp-controller="Student" asp-action="Create" class="btn btn-primary btn-lg">Add Student</a>
+    <a asp-controller="Student" asp-action="Index" class="btn btn-success btn-lg">View Students</a>
+</div>
