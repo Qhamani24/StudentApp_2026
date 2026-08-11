@@ -1,5 +1,5 @@
-﻿using StudentApp_2026.Data;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using StudentApp_2026.Views.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,8 +8,7 @@ builder.Services.AddControllersWithViews();
 
 // ✅ Register ApplicationDbContext BEFORE builder.Build()
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
+    options.UseInMemoryDatabase("ApplicationDbContext")); // Use In-Memory Database for simplicity
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

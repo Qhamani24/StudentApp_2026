@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Identity.Client;
-using StudentApp_2026.Data;
 using StudentApp_2026.Models;
+using StudentApp_2026.Views.Services;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace StudentApp_2026.Controllers
@@ -15,9 +16,9 @@ namespace StudentApp_2026.Controllers
         }
 
         // Read - Get all students
-        public IActionResult Index()
+        public  async Task<IActionResult> Index()
         {
-            var students = _context.Students.ToList();
+            var students = await _context.Students.ToListAsync(); // Use ToListAsync() for asynchronous operation, other tasks can happen while waiting for the database operation to complete.
             return View(students);
         }
 
@@ -25,21 +26,21 @@ namespace StudentApp_2026.Controllers
         public IActionResult Create() => View();
 
         [HttpPost]
-        public IActionResult Create(Student student)
+        public async Task<IActionResult> Create(Student student)
         {
             if (ModelState.IsValid)
             {
-                _context.Students.Add(student);
-                _context.SaveChanges();
-                return RedirectToAction("Index");
+                await _context.Students.AddAsync(student);
+                ;
             }
-            return View(student);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         // UPDATE: Edit student
-        public IActionResult Edit(int id)
+        public async Task< IActionResult> Edit(int id)
         {
-            var student = _context.Students.Find(id);
+            var student = await _context.Students.FindAsync(id);
             return student == null ? NotFound() : View(student);
         }
 
@@ -56,13 +57,13 @@ namespace StudentApp_2026.Controllers
         }
 
         // DELETE: Remove student
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            var student = _context.Students.Find(id);
+            var student = await _context.Students.FindAsync(id);
             if (student != null)
             {
                 _context.Students.Remove(student);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
             return RedirectToAction("Index");
         }

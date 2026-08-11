@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.SqlServer;
 using StudentApp_2026.Models;
 
 // Create a new class called ApplicationDbContext that inherits from DbContext. This class will be used to interact with the database.	
-namespace StudentApp_2026.Data
+namespace StudentApp_2026.Views.Services
 {
 	public class ApplicationDbContext : DbContext
 	{
