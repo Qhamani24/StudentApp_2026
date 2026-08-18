@@ -22,7 +22,7 @@ namespace StudentApp_2026.Controllers
             return View(students);
         }
 
-        // Create- add new students
+        // Create: add new students
         public IActionResult Create() => View();
 
         [HttpPost]
@@ -31,29 +31,22 @@ namespace StudentApp_2026.Controllers
             if (ModelState.IsValid)
             {
                 await _context.Students.AddAsync(student);
-                ;
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index");
             }
-            _context.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
-        // UPDATE: Edit student
-        public async Task< IActionResult> Edit(int id)
-        {
-            var student = await _context.Students.FindAsync(id);
-            return student == null ? NotFound() : View(student);
+            return View(student); // redisplay form with validation errors
         }
 
         [HttpPost]
-        public IActionResult Edit(Student student)
+        public async Task<IActionResult> Edit(Student student)
         {
             if (ModelState.IsValid)
             {
                 _context.Students.Update(student);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            return View(student);
+            return View(student); // redisplay form with validation errors
         }
 
         // DELETE: Remove student

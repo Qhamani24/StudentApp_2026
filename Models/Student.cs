@@ -9,19 +9,19 @@ namespace StudentApp_2026.Models
         public int StudentId { get; set; }
 
         [Required(ErrorMessage = "Your Name is required")]
-        public string FirstName { get; set; }
+        public required string FirstName { get; set; }
 
         [Required(ErrorMessage = "Your Last name is required")]
-        public string LastName { get; set; }
+        public required string LastName { get; set; }
 
         [Required(ErrorMessage = "Your Student Number is required")]
-        public string StudentNumber { get; set; }
+        public required string StudentNumber { get; set; }
 
         [Required(ErrorMessage = "Your Gender is required")]
-        public string Gender { get; set; }
+        public required string Gender { get; set; }
 
         [Required(ErrorMessage ="Your Faculty is required")]
-        public string Faculty { get; set; }
+        public required string Faculty { get; set; }
     }
         
 }
